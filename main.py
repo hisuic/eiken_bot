@@ -1,6 +1,7 @@
 import discord
 import os
 from dotenv import load_dotenv
+from module.word_test import ChooseMode
 
 load_dotenv()
 
@@ -20,6 +21,10 @@ async def on_message(message):
 
     if message.content.startswith('$hello'):
         await message.channel.send('Hello!')
+
+    if message.content.startswith('$test'):
+        choose_mode = ChooseMode()
+        await message.channel.send('Test start', view=choose_mode)
 
 TOKEN = os.getenv('TOKEN')
 client.run(str(TOKEN))
