@@ -1,7 +1,7 @@
 import discord
 import os
 from dotenv import load_dotenv
-from module.word_test import ChooseMode
+from module.word_test import ModeSelection
 
 load_dotenv()
 
@@ -23,8 +23,8 @@ async def on_message(message):
         await message.channel.send('Hello!')
 
     if message.content.startswith('$test'):
-        choose_mode = ChooseMode()
-        await message.channel.send('Test start', view=choose_mode)
+        mode_selection = ModeSelection()
+        await message.channel.send('Test start', view=mode_selection)
 
 TOKEN = os.getenv('TOKEN')
 client.run(str(TOKEN))
