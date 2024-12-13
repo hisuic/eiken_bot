@@ -37,6 +37,8 @@ def GetData(mode, num): # Mode 0: val1<-Word, val2<-Meaning Mode 1: Reverse
         return val2, val1 # Meaning, Word
 
 if __name__ == '__main__':
+    print(GetData(0, 20))
+    print(GetData(1, 20))
     print("hello")
 
 conn.close() # 接続を閉じる
