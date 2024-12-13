@@ -8,7 +8,7 @@ conn = sqlite3.connect(str(os.getenv('DB_FILE')))
 c = conn.cursor()
 
 def GetWord(i):
-    c.execute("SELECT word FROM words WHERE word_id=:word_id", {'word_id': num})
+    c.execute("SELECT word FROM words WHERE word_id=:word_id", {'word_id': i})
     word = c.fetchone()
     if word:  # 結果がある場合
         # print(word[0])  # タプルの最初の要素を取得
@@ -19,7 +19,7 @@ def GetWord(i):
 
 def GetMeaning(i):
     # 意味を取得
-    c.execute("SELECT meaning FROM words WHERE word_id=:word_id", {'word_id': num})
+    c.execute("SELECT meaning FROM words WHERE word_id=:word_id", {'word_id': i})
     meaning = c.fetchone()
     if meaning:  # 結果がある場合
         # print(meaning[0])  # タプルの最初の要素を取得
