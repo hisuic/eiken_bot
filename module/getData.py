@@ -1,9 +1,10 @@
 import sqlite3
+import os
 from dotenv import load_dotenv
 
 load_dotenv()
 
-conn = sqlite3.connect(os.getenv(DB_FILE))
+conn = sqlite3.connect(str(os.getenv('DB_FILE')))
 c = conn.cursor()
 
 def GetWord(i):
