@@ -12,7 +12,8 @@ def GetWord(i):
     word = c.fetchone()
     if word:  # 結果がある場合
         # print(word[0])  # タプルの最初の要素を取得
-        return word[0]
+        strWord = word[0]
+        return strWord
     else:
         return "ERROR: Word not found."
 
@@ -23,12 +24,15 @@ def GetMeaning(i):
     meaning = c.fetchone()
     if meaning:  # 結果がある場合
         # print(meaning[0])  # タプルの最初の要素を取得
-        return meaning[0]
+        strMeaning = meaning[0]
+        return strMeaning
     else:
         return "ERROR: Meaning not found."
 
 
-def GetData(mode, num): # Mode 0: val1<-Word, val2<-Meaning Mode 1: Reverse
+def GetData(mode, num):
+    # Mode 0: Word, Meaning
+    # Mode 1: Meaning, Word
     val1 = GetWord(num)
     val2 = GetMeaning(num)
     if mode == 0:
@@ -37,8 +41,16 @@ def GetData(mode, num): # Mode 0: val1<-Word, val2<-Meaning Mode 1: Reverse
         return val2, val1 # Meaning, Word
 
 if __name__ == '__main__':
-    print(GetData(0, 20))
-    print(GetData(1, 20))
-    print("hello")
+    # Mode 0
+    test1_word, test1_meaning = GetData(0, 20)
+    # Mode 1 
+    test2_meaning, test2_word = GetData(1, 20)
+
+    print("test1_word: " + test1_word)
+    print("test1_meaning: " + test1_meaning)
+    print("test2_meaning: " + test2_meaning)
+    print("test2_word: " + test2_word)
+
+    print("Test Done")
 
 conn.close() # 接続を閉じる
