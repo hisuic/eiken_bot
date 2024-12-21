@@ -1,7 +1,10 @@
 import discord
+from discord.ext import commands
 import os
+
 from dotenv import load_dotenv
 from module.word_test import ModeSelection
+from module.button import Button_2
 
 load_dotenv()
 
@@ -23,8 +26,15 @@ async def on_message(message):
         await message.channel.send('Hello!')
 
     if message.content.startswith('$test'):
-        mode_selection = ModeSelection()
-        await message.channel.send('Test start', view=mode_selection)
+        # original
+        # mode_selection = ModeSelection()
+        # await message.channel.send('Test start', view=mode_selection)
+
+        # test
+        view = Button_2(value1 = "value1", value2 = "value2")
+        await ctx.send("選択肢です。", view=view)
+        await view.wait()
+        print(selected)
 
 TOKEN = os.getenv('TOKEN')
 client.run(str(TOKEN))
