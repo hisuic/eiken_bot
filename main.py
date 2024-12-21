@@ -32,7 +32,7 @@ async def on_message(message):
 
         # test
         view = Button_2(value1 = "value1", value2 = "value2")
-        await ctx.send("選択肢です。", view=view)
+        # await message.send("選択肢です。", view=view)
         await view.wait()
         print(selected)
 
