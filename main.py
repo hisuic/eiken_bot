@@ -1,10 +1,9 @@
 import discord
 from discord.ext import commands
 import os
-
 from dotenv import load_dotenv
+
 from module.word_test import WordTest
-from module.button import Button2, Button4
 
 load_dotenv()
 
