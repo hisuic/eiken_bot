@@ -12,7 +12,7 @@ from module.button import Button2, Button3, Button4
 # print(view.selected)
 # =========================================================================
 
-async def WordTest(ctx):
+async def WordTestAll(ctx):
     view = Button2(value1="value1", value2="value2")
     await ctx.send("次の問題に回答してください！", view=view)
     await view.wait()

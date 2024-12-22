@@ -3,7 +3,7 @@ from discord.ext import commands
 import os
 from dotenv import load_dotenv
 
-from module.word_test import WordTest
+from module.word_test import WordTestAll
 
 load_dotenv()
 
@@ -21,8 +21,8 @@ async def hello(ctx):
     print("hello")
 
 @client.command()
-async def test(ctx):
-    await WordTest(ctx)
+async def atest(ctx):
+    await WordTestAll(ctx)
 
 TOKEN = os.getenv('TOKEN')
 client.run(str(TOKEN))
