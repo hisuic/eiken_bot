@@ -4,37 +4,34 @@ import os
 
 from dotenv import load_dotenv
 from module.word_test import ModeSelection
-from module.button import Button_2
+from module.button import Button2
 
 load_dotenv()
 
 intents = discord.Intents.default()
 intents.message_content = True
-
-client = discord.Client(intents=intents)
+# client = discord.Client(intents=intents)
+client = commands.Bot(command_prefix="!", intents=intents)
 
 @client.event
 async def on_ready():
     print(f'We have logged in as {client.user}')
 
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
+@client.command()
+async def hello(ctx):
+    print("hello")
 
-    if message.content.startswith('$hello'):
-        await message.channel.send('Hello!')
+@client.command()
+async def test(ctx):
+    # Viewのインスタンス生成時に引数を渡す (例: question="appleの意味は？")
+    view = Button2(value1="value1", value2="value2")
+    # メッセージと一緒にViewを送信
+    await ctx.send("次の問題に回答してください！", view=view)
 
-    if message.content.startswith('$test'):
-        # original
-        # mode_selection = ModeSelection()
-        # await message.channel.send('Test start', view=mode_selection)
+    # Viewのボタンが押される (またはタイムアウト) まで待機
+    await view.wait()
 
-        # test
-        view = Button_2(value1 = "value1", value2 = "value2")
-        # await message.send("選択肢です。", view=view)
-        await view.wait()
-        print(selected)
+    print(view.selected)
 
 TOKEN = os.getenv('TOKEN')
 client.run(str(TOKEN))
