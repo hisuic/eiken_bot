@@ -2,7 +2,7 @@ import discord
 import os
 
 from module.button import Button2, Button3, Button4
-from module.getChoices import GetRandomWordFromAll
+from module.getChoices import GetRandomWordFromAll, GetFourChoicesFromAll
 from module.getData import GetWord, GetMeaning
 
 from dotenv import load_dotenv
@@ -27,17 +27,21 @@ async def ModeSelection(ctx):
 
 async def WordTestAll(ctx):
     mode = await ModeSelection(ctx)
+
     if mode == 1:
         # 単語から意味を予測
         for i in range(10):
             correct_word_id = GetRandomWordFromAll()
             word = GetWord(correct_word_id)
-            print(word)
+            # print(word) # debug
+            choices, answer = GetFourChoicesFromAll(correct_meaning_id, 2)
     elif mode == 2:
         # 意味から単語を予測
         for i in range(10):
             correct_meaning_id = GetRandomWordFromAll()
             meaning = GetMeaning(correct_meaning_id)
-            print(meaning)
+            # print(meaning) # debug
+            choices, answer = GetFourChoicesFromAll(correct_meaning_id, 1)
     else:
+
         print("EXPECTED ERROR: Something went wrong around ModeSelection() in word_test.py")
