@@ -53,4 +53,4 @@ if __name__ == '__main__':
 
     print("Test Done")
 
-conn.close() # 接続を閉じる
+# conn.close() # 接続を閉じる
