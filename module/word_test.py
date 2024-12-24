@@ -61,9 +61,9 @@ async def WordTestAll(ctx):
             selected = await TestWith4NumberChoices(ctx, choices, word)
             if selected == answer:
                 count += 1
-                await ctx.send("Correct")
+                await ctx.send("Correct!")
             else:
-                await ctx.send("Wrong")
+                await ctx.send("Wrong! \nThe correct meaning is: " + choices[answer])
         await ctx.send(str(count) + "問正解です。")
 
     elif mode == 2:
@@ -77,9 +77,9 @@ async def WordTestAll(ctx):
             selected = await TestWith4NumberChoices(ctx, choices, meaning)
             if selected == answer:
                 count += 1
-                await ctx.send("Correct")
+                await ctx.send("Correct!")
             else:
-                await ctx.send("Wrong")
+                await ctx.send("Wrong! \nThe correct word is: " + choices[answer])
         await ctx.send(str(count) + "問正解です。")
 
     else:
