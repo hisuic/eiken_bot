@@ -38,8 +38,10 @@ class Button2(discord.ui.View):
             #     f"{interaction.user.mention} {self.value1} が選ばれました！", 
             #     ephemeral=True
             # )
+            await interaction.response.defer()
         elif cid == "button2":
             self.selected = 2
+            await interaction.response.defer()
         self.stop()
 
     async def on_timeout(self):
@@ -84,10 +86,13 @@ class Button3(discord.ui.View):
         cid = interaction.data["custom_id"]
         if cid == "button1":
             self.selected = 1
+            await interaction.response.defer()
         elif cid == "button2":
             self.selected = 2
+            await interaction.response.defer()
         elif cid == "button3":
             self.selected = 3
+            await interaction.response.defer()
         self.stop()
 
     async def on_timeout(self):
@@ -141,12 +146,16 @@ class Button4(discord.ui.View):
         cid = interaction.data["custom_id"]
         if cid == "button1":
             self.selected = 1
+            await interaction.response.defer()
         elif cid == "button2":
             self.selected = 2
+            await interaction.response.defer()
         elif cid == "button3":
             self.selected = 3
+            await interaction.response.defer()
         elif cid == "button4":
             self.selected = 4
+            await interaction.response.defer()
         self.stop()
 
     async def on_timeout(self):
@@ -196,12 +205,16 @@ class Button4Numbers(discord.ui.View):
         cid = interaction.data["custom_id"]
         if cid == "button1":
             self.selected = 0
+            await interaction.response.defer()
         elif cid == "button2":
             self.selected = 1
+            await interaction.response.defer()
         elif cid == "button3":
             self.selected = 2
+            await interaction.response.defer()
         elif cid == "button4":
             self.selected = 3
+            await interaction.response.defer()
         self.stop()
 
     async def on_timeout(self):
