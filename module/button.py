@@ -7,7 +7,7 @@ import discord
 # print(view.selected)
 
 class Button2(discord.ui.View):
-    def __init__(self, value1: str = None, value2: str = None, timeout=15):
+    def __init__(self, value1: str = None, value2: str = None, timeout=180):
         super().__init__(timeout=timeout)
         self.value1 = value1
         self.value2 = value2
@@ -34,16 +34,12 @@ class Button2(discord.ui.View):
         cid = interaction.data["custom_id"]
         if cid == "button1":
             self.selected = 1
-            await interaction.response.send_message(
-                f"{interaction.user.mention} {self.value1} が選ばれました！", 
-                ephemeral=True
-            )
+            # await interaction.response.send_message(
+            #     f"{interaction.user.mention} {self.value1} が選ばれました！", 
+            #     ephemeral=True
+            # )
         elif cid == "button2":
             self.selected = 2
-            await interaction.response.send_message(
-                f"{interaction.user.mention} {self.value2} が選ばれました！", 
-                ephemeral=True
-            )
         self.stop()
 
     async def on_timeout(self):
@@ -52,7 +48,7 @@ class Button2(discord.ui.View):
             item.disabled = True
 
 class Button3(discord.ui.View):
-    def __init__(self, value1: str = None, value2: str = None, value3: str = None, timeout=15):
+    def __init__(self, value1: str = None, value2: str = None, value3: str = None, timeout=180):
         super().__init__(timeout=timeout)
         self.value1 = value1
         self.value2 = value2
@@ -88,22 +84,10 @@ class Button3(discord.ui.View):
         cid = interaction.data["custom_id"]
         if cid == "button1":
             self.selected = 1
-            await interaction.response.send_message(
-                f"{interaction.user.mention} {self.value1} が選ばれました！", 
-                ephemeral=True
-            )
         elif cid == "button2":
             self.selected = 2
-            await interaction.response.send_message(
-                f"{interaction.user.mention} {self.value2} が選ばれました！", 
-                ephemeral=True
-            )
         elif cid == "button3":
             self.selected = 3
-            await interaction.response.send_message(
-                f"{interaction.user.mention} {self.value3} が選ばれました！", 
-                ephemeral=True
-            )
         self.stop()
 
     async def on_timeout(self):
@@ -112,7 +96,7 @@ class Button3(discord.ui.View):
             item.disabled = True
 
 class Button4(discord.ui.View):
-    def __init__(self, value1: str = None, value2: str = None, value3: str = None, value4: str = None, timeout=15):
+    def __init__(self, value1: str = None, value2: str = None, value3: str = None, value4: str = None, timeout=180):
         super().__init__(timeout=timeout)
         self.value1 = value1
         self.value2 = value2
@@ -157,28 +141,12 @@ class Button4(discord.ui.View):
         cid = interaction.data["custom_id"]
         if cid == "button1":
             self.selected = 1
-            await interaction.response.send_message(
-                f"{interaction.user.mention} {self.value1} が選ばれました！", 
-                ephemeral=True
-            )
         elif cid == "button2":
             self.selected = 2
-            await interaction.response.send_message(
-                f"{interaction.user.mention} {self.value2} が選ばれました！", 
-                ephemeral=True
-            )
         elif cid == "button3":
             self.selected = 3
-            await interaction.response.send_message(
-                f"{interaction.user.mention} {self.value3} が選ばれました！", 
-                ephemeral=True
-            )
         elif cid == "button4":
             self.selected = 4
-            await interaction.response.send_message(
-                f"{interaction.user.mention} {self.value4} が選ばれました！", 
-                ephemeral=True
-            )
         self.stop()
 
     async def on_timeout(self):
@@ -187,7 +155,7 @@ class Button4(discord.ui.View):
             item.disabled = True
 
 class Button4Numbers(discord.ui.View):
-    def __init__(self, timeout=15):
+    def __init__(self, timeout=180):
         super().__init__(timeout=timeout)
         self.selected = None
 
@@ -234,11 +202,6 @@ class Button4Numbers(discord.ui.View):
             self.selected = 2
         elif cid == "button4":
             self.selected = 3
-
-        await interaction.response.send_message(
-            f"{interaction.user.mention} ボタン {int(cid[-1])} が選ばれました！",
-            ephemeral=True
-        )
         self.stop()
 
     async def on_timeout(self):
