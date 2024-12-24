@@ -1,7 +1,7 @@
 import discord
 import os
 
-from module.button import Button2, Button3, Button4
+from module.button import Button2, Button3, Button4, Button4Numbers
 from module.getChoices import GetRandomWordFromAll, GetFourChoicesFromAll
 from module.getData import GetWord, GetMeaning
 
@@ -25,23 +25,60 @@ async def ModeSelection(ctx):
     await view.wait()
     return view.selected
 
+def Array2MarkdownBulletPoints(items):
+    """
+    Converts a list of strings into a Markdown bullet point string.
+
+    Args:
+        items (list): A list of strings to be converted.
+
+    Returns:
+        str: A string formatted as Markdown bullet points.
+    """
+    if not items:
+        return ""
+    return "\n".join(f"- {item}" for item in items)
+
+async def TestWith4NumberChoices(ctx, choices, quiz_word):
+    choices_bulletpoints = Array2MarkdownBulletPoints(choices)
+    view = Button4Numbers()
+    await ctx.send(quiz_word + "\n" + choices_bulletpoints, view=view)
+    await view.wait()
+    # print(view.selected) # debug
+    return view.selected
+
 async def WordTestAll(ctx):
     mode = await ModeSelection(ctx)
 
     if mode == 1:
         # 単語から意味を予測
+        count = 0
         for i in range(10):
             correct_word_id = GetRandomWordFromAll()
             word = GetWord(correct_word_id)
             # print(word) # debug
-            choices, answer = GetFourChoicesFromAll(correct_meaning_id, 2)
+            choices, answer = GetFourChoicesFromAll(correct_word_id, 2)
+            selected = await TestWith4NumberChoices(ctx, choices, word)
+            if selected == answer:
+                count += 1
+                await ctx.send("Correct")
+            else:
+                await ctx.send("Wrong")
+
     elif mode == 2:
         # 意味から単語を予測
+        count = 0
         for i in range(10):
             correct_meaning_id = GetRandomWordFromAll()
             meaning = GetMeaning(correct_meaning_id)
             # print(meaning) # debug
             choices, answer = GetFourChoicesFromAll(correct_meaning_id, 1)
-    else:
+            selected = TestWith4NumberChoices(ctx, choices, meaning)
+            if selected == answer:
+                count += 1
+                await ctx.send("Correct")
+            else:
+                await ctx.send("Wrong")
 
+    else:
         print("EXPECTED ERROR: Something went wrong around ModeSelection() in word_test.py")

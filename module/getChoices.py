@@ -58,25 +58,20 @@ def GetFourChoicesFromAll(correct_word, mode):
     # Mode 2: Will return set of meanings
     # ====================================
 
-    choices_id.append(correct_word)
+    choices_id = [correct_word]
 
-    for i in range(3):
+    while len(choices_id) < 4:
         candidate = GetRandomWordFromAll()
-        if candidate == correct_word:
-            while(1):
-                candidate = GetRandomWordFromAll()
-                if candidate == correct_word:
-                    candidate = GetRandomWordFromAll()
-                else:
-                    break
-        choices_id.append(candidate)
+        if candidate not in choices_id:
+            choices_id.append(candidate)
 
     choices_id, answer = ShuffleWithAnswer(choices_id, choices_id[0])
 
+    choices = []
     if mode == 1:
         for j in range(4):
             choices.append(GetWord(choices_id[j]))
-    else if mode == 2:
+    elif mode == 2:
         for j in range(4):
             choices.append(GetMeaning(choices_id[j]))
     else:
