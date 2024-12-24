@@ -185,3 +185,63 @@ class Button4(discord.ui.View):
         self.selected = None
         for item in self.children:
             item.disabled = True
+
+class Button4Numbers(discord.ui.View):
+    def __init__(self, timeout=15):
+        super().__init__(timeout=timeout)
+        self.selected = None
+
+        button1 = discord.ui.Button(
+            label="1",
+            style=discord.ButtonStyle.success,
+            custom_id="button1"
+        )
+        button1.callback = self.on_button_click
+
+        button2 = discord.ui.Button(
+            label="2",
+            style=discord.ButtonStyle.success,
+            custom_id="button2"
+        )
+        button2.callback = self.on_button_click
+
+        button3 = discord.ui.Button(
+            label="3",
+            style=discord.ButtonStyle.success,
+            custom_id="button3"
+        )
+        button3.callback = self.on_button_click
+
+        button4 = discord.ui.Button(
+            label="4",
+            style=discord.ButtonStyle.success,
+            custom_id="button4"
+        )
+        button4.callback = self.on_button_click
+
+        self.add_item(button1)
+        self.add_item(button2)
+        self.add_item(button3)
+        self.add_item(button4)
+
+    async def on_button_click(self, interaction: discord.Interaction):
+        cid = interaction.data["custom_id"]
+        if cid == "button1":
+            self.selected = 0
+        elif cid == "button2":
+            self.selected = 1
+        elif cid == "button3":
+            self.selected = 2
+        elif cid == "button4":
+            self.selected = 3
+
+        await interaction.response.send_message(
+            f"{interaction.user.mention} ボタン {int(cid[-1])} が選ばれました！",
+            ephemeral=True
+        )
+        self.stop()
+
+    async def on_timeout(self):
+        self.selected = None
+        for item in self.children:
+            item.disabled = True
