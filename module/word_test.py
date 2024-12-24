@@ -42,7 +42,7 @@ def Array2MarkdownBulletPoints(items):
 async def TestWith4NumberChoices(ctx, choices, quiz_word):
     choices_bulletpoints = Array2MarkdownBulletPoints(choices)
     view = Button4Numbers()
-    await ctx.send(quiz_word + "\n" + choices_bulletpoints, view=view)
+    await ctx.send("## " + quiz_word + "\n" + choices_bulletpoints, view=view)
     await view.wait()
     # print(view.selected) # debug
     return view.selected
@@ -64,6 +64,7 @@ async def WordTestAll(ctx):
                 await ctx.send("Correct")
             else:
                 await ctx.send("Wrong")
+        await ctx.send(str(count) + "問正解です。")
 
     elif mode == 2:
         # 意味から単語を予測
@@ -79,6 +80,7 @@ async def WordTestAll(ctx):
                 await ctx.send("Correct")
             else:
                 await ctx.send("Wrong")
+        await ctx.send(str(count) + "問正解です。")
 
     else:
         print("EXPECTED ERROR: Something went wrong around ModeSelection() in word_test.py")
