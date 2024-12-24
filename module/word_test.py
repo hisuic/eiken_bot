@@ -74,7 +74,7 @@ async def WordTestAll(ctx):
             meaning = GetMeaning(correct_meaning_id)
             # print(meaning) # debug
             choices, answer = GetFourChoicesFromAll(correct_meaning_id, 1)
-            selected = TestWith4NumberChoices(ctx, choices, meaning)
+            selected = await TestWith4NumberChoices(ctx, choices, meaning)
             if selected == answer:
                 count += 1
                 await ctx.send("Correct")
